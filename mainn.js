@@ -82,6 +82,7 @@ let carrito = []
 
 
 solicitarNombre();
+crearProductos();
 ingresarOpcion();
 
 
