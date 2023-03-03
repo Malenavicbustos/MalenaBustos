@@ -4,10 +4,10 @@ function solicitarNombre() {
 }
 
 class Productos {
-  constructor (nombre, precio, stock){
+  constructor (nombre, precio, cantidad){
       this.nombre = nombre;
       this.precio = precio;
-      this.stock = stock;
+      this.cantidad = cantidad;
   }
 }
 
@@ -82,7 +82,8 @@ let carrito = []
 
 
 solicitarNombre();
-crearProductos();
 ingresarOpcion();
+
+
 
 
