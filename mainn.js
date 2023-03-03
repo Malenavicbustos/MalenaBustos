@@ -4,85 +4,102 @@ function solicitarNombre() {
 }
 
 class Productos {
-  constructor (nombre, precio, cantidad){
-      this.nombre = nombre;
-      this.precio = precio;
-      this.cantidad = cantidad;
+  constructor(nombre, precio, stock) {
+    this.nombre = nombre;
+    this.precio = precio;
+    this.stock = stock;
   }
 }
 
 let perfumes = [
-  {nombre: 'Calvin Klein one', precio: 3700, stock: 2},
-  {nombre: 'Summer Essencials', precio: 10700, stock: 5},
-  {nombre: 'Clinique', precio: 12000, stock: 7},
-  {nombre: 'Rose', precio: 3000, stock: 8},
-]
+  { nombre: "Calvin Klein one", precio: 3700, stock: 2 },
+  { nombre: "Summer Essencials", precio: 10700, stock: 5 },
+  { nombre: "Clinique", precio: 12000, stock: 7 },
+  { nombre: "Rose", precio: 3000, stock: 8 },
+];
 
 let cosmetica = [
-{nombre: 'mascara de pestañas', precio: 12000, stock: 9},
-{nombre: 'sombras color pastel', precio: 2500, stock: 7},
-{nombre: 'base liquida', precio: 1300, stock: 5},
-{nombre: 'labial', precio: 2500, stock: 25}
+  { nombre: "mascara de pestañas", precio: 12000, stock: 9 },
+  { nombre: "sombras color pastel", precio: 2500, stock: 7 },
+  { nombre: "base liquida", precio: 1300, stock: 5 },
+  { nombre: "labial", precio: 2500, stock: 25 },
+];
 
-]
-
-let skinCare =[
-{nombre:'crema hidratanta facial', precio: 300, stock: 0},
-{nombre:'desmaquillante 3 en 1', precio: 5500, stock: 93},
-{nombre:'esponjas', precio: 950, stock: 10},
-{nombre:'locion y tonico', precio: 3000, stock: 0}
-]
+let skinCare = [
+  { nombre: "crema hidratante facial", precio: 300, stock: 0 },
+  { nombre: "desmaquillante 3 en 1", precio: 5500, stock: 93 },
+  { nombre: "esponjas", precio: 950, stock: 10 },
+  { nombre: "locion y tonico", precio: 3000, stock: 0 },
+];
 
 let solares = [
-{nombre:'autobronceante', precio: 3500, stock: 12},
-{nombre:'protector solar', precio: 3000, stock: 2},
-{nombre:'hidratante post solar', precio: 2000, stock: 20},
-]
-
+  { nombre: "autobronceante", precio: 3500, stock: 12 },
+  { nombre: "protector solar", precio: 3000, stock: 2 },
+  { nombre: "hidratante post solar", precio: 2000, stock: 20 },
+];
 
 function crearProductos(arrayProductos) {
-let productos = [];
+  let productos = [];
 
-arrayProductos.forEach(item => {
-  let producto = new Productos(item.nombre, item.precio, item.stock);
-  productos.push(producto);
-});
+  arrayProductos.forEach((item) => {
+    let producto = new Productos(item.nombre, item.precio, item.stock);
+    productos.push(producto);
+  });
 
-return productos;
+  return productos;
 }
 
 let catElegida;
 let ProductoSeleccionado;
 
 function ingresarOpcion() {
-let catElegida = false
-opcion = prompt("Ingrese el numero de la categoria que desea buscar \n 1. Perfumes \n 2. Cosmetica \n 3. Skin Care \n 4. Solares");
-if (opcion === "1") {
-  alert("Elegiste la categoria Perfumes");
-  catElegida = perfumes;
-} else if (opcion === "2") {
-  alert("Elegiste la categoria cosmeticos")
-  catElegida = cosmetica;
-} else if (opcion === "3") {
-  alert("Elegiste la categoria Skincare");
-  catElegida = skinCare;
-} else if (opcion === "4") {
-  alert ("Elegiste la categoria solares")
-  catElegida = solares
-}
-if (catElegida) {
-  let ProductoSeleccionado = crearProductos(catElegida)
-  for (let i=0; i < ProductoSeleccionado.length; i++){
-    console.log(ProductoSeleccionado[i].nombre)
+  let catElegida = false;
+  opcion = prompt(
+    "Ingrese el numero de la categoria que desea buscar \n 1. Perfumes \n 2. Cosmetica \n 3. Skin Care \n 4. Solares"
+  );
+  if (opcion === "1") {
+    alert("Elegiste la categoria Perfumes");
+    catElegida = perfumes;
+  } else if (opcion === "2") {
+    alert("Elegiste la categoria cosmeticos");
+    catElegida = cosmetica;
+  } else if (opcion === "3") {
+    alert("Elegiste la categoria Skincare");
+    catElegida = skinCare;
+  } else if (opcion === "4") {
+    alert("Elegiste la categoria solares");
+    catElegida = solares;
+  }
+  if (catElegida) {
+    let ProductoSeleccionado = crearProductos(catElegida);
+    console.log(ProductoSeleccionado);
+    for (let i = 0; i < ProductoSeleccionado.length; i++) {
+      console.log(ProductoSeleccionado[i].nombre);
+    }
+    filtrarPrecio(ProductoSeleccionado);
+  } else {
+    alert("Opcion no valida");
+    ingresarOpcion();
   }
 }
+
+function filtrarPrecio(catElegida) {
+  let precio = prompt("Ingrese el precio maximo que desea pagar");
+  let productosFiltrados = catElegida.filter((item) => {
+    return item.precio <= precio;
+  });
+  console.log(productosFiltrados);
+  let lista = "";
+  for (let i = 0; i < productosFiltrados.length; i++) {
+    lista = lista + (productosFiltrados[i].nombre) + "\n" ;
+  }
+  alert("Los productos que se encuentran en su rango de precio son: \n" + lista);
 }
-
-let carrito = []
-
+  
 
 solicitarNombre();
 ingresarOpcion();
+filtrarPrecio();
 
 
 
